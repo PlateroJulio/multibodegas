@@ -1,12 +1,42 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
+  <div id="app" >
+        <div id="nav">
+            <router-link v-if="authenticated" to="/menu" ></router-link>
+        </div>
+        <router-view @authenticated="setAuthenticated" />
   </div>
 </template>
+
+<script>
+import Login from '@/views/Login.vue'
+export default {
+  name: 'App',
+  components: {
+    Login
+  },
+  data() {
+      return {
+      authenticated: false,
+      session: sessionStorage.getItem('autenticado') || null
+
+      }
+  },
+  mounted() {
+      if(!this.authenticated) {
+        if (this.session == null) {
+            this.$router.replace({ name: "Login" });
+        }
+           
+      }
+  },
+   methods: {
+      setAuthenticated(status) {
+          this.authenticated = status;
+      }
+  }       
+  
+}
+</script>
 
 <style lang="scss">
 #app {
@@ -25,8 +55,10 @@
     color: #2c3e50;
 
     &.router-link-exact-active {
-      color: #42b983;
+      color: white;
     }
   }
 }
+
+
 </style>
