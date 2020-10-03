@@ -94,7 +94,7 @@ export default {
                     sessionStorage.setItem('autenticado', ' Julio Platero');
 
                     this.$router.replace({ name: "Menu" });
-
+                    //hola
                 }else {
                     var msj = {"titulo":"Datos incorrectos", "mensaje":"usuario y/o clave incorrectos."}
                     this.msjError.push(msj);
